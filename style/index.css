@@ -1,0 +1,52 @@
+* {
+    padding: 0px;
+    margin: 0px;
+}
+
+canvas {
+    border: 1px solid black;
+    border-radius: 10px;
+}
+
+#nav-bar {
+    width: 80;
+    background-color: blueviolet;
+    display: flex;
+    padding: 20px 20px;
+}
+
+.site-name {
+    font-size: 25px;
+    font-weight: bold;
+    color: white;
+}
+
+.container-canvas {
+    margin: 10px 20px;
+    text-align: center;
+}
+
+.container-btn {
+    padding: 10px;
+    text-align: center;
+    margin: 10px 40px;
+}
+
+.btn {
+    padding: 10px 20px;
+    margin: 0px 10px;
+    background-color: blueviolet;
+    color: white;
+    border: none;
+    border-radius: 15px;
+    font-weight: bold;
+    font-size: 15px;
+}
+
+.container-pred {
+    text-align: center;
+}
+
+.pred-card {
+    text-align: center;
+}

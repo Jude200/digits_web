@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style/index.css">
+</head>
+
+<body>
+    <header id="nav-bar">
+        <div class="nav-bar">
+            <div class="site-name">Digits 🟢🟢🟢 </div>
+        </div>
+    </header>
+
+    <main>
+        <div class="container-canvas">
+            <canvas id="canvas-card" width="512" , height="512">
+                <script>
+                    var canvas = document.getElementById("canvas-card");
+                    var ctx = canvas.getContext("2d");
+
+                    var mouse_x = 0;
+                    var mouse_y = 0;
+
+                    var is_drawing = false;
+
+                    var lineWidth = 8;
+
+                    // function pour dessiner
+                    function drawMousePath(x, y) {
+                        if (is_drawing) {
+                            ctx.lineWidth = lineWidth;
+                            ctx.lineTo(x, y);
+                            ctx.stroke()
+                        }
+                    }
+
+                    // event pour detecter lorsque le click gauche est enfoncé
+                    canvas.addEventListener("mousedown", function (event) {
+                        if (event.button === 0) {
+                            is_drawing = true;
+                            ctx.beginPath();
+                            mouse_x = event.clientX - canvas.offsetLeft;
+                            mouse_y = event.clientY - canvas.offsetTop;
+
+                            ctx.moveTo(mouse_x, mouse_y)
+                        }
+                    })
+
+                    // event pour détecter lorsque le click gauche est relaché
+                    canvas.addEventListener("mouseup", function (event) {
+                        if (event.button === 0) {
+                            is_drawing = false;
+                        }
+                    })
+
+                    // event pour détecter le mouvement de la souris
+                    canvas.addEventListener("mousemove", function (event) {
+                        mouse_x = event.clientX - canvas.offsetLeft;
+                        mouse_y = event.clientY - canvas.offsetTop;
+                        drawMousePath(mouse_x, mouse_y);
+                    })
+
+                    // event pour effacer le dession losque le click droit est enfoncé
+                    canvas.addEventListener("contextmenu", function (event) {
+                        event.preventDefault();
+                        ctx.clearRect(0, 0, canvas.width, canvas.height);
+                        document.querySelector(".pred-msg").innerHTML = ""
+                        document.querySelector(".pred-number").innerHTML = ""
+                    })
+                </script>
+            </canvas>
+        </div>
+        <div class="container-pred">
+            <div class="pred-card">
+                <div class="pred-msg"></div>
+                <div class="pred-number"></div>
+                <div class="pred-probability"></div>
+            </div>
+        </div>
+
+        <div class="container-btn">
+            <button id="analysis-btn" class="btn" onclick="sendCanvasImageToApi()">Analyser 🛫</button>
+            <button id="save-btn" class="btn" onclick="saveCanvasAsImage()">Sauvegarder ⏺️</button>
+        </div>
+    </main>
+
+</body>
+<script src="js/index.js"></script>
+
+</html>
